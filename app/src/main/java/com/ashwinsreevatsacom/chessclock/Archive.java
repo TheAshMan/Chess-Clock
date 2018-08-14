@@ -1,17 +1,12 @@
 package com.ashwinsreevatsacom.chessclock;
 
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import java.sql.Time;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
-import Model.TimeRecord;
+import com.ashwinsreevatsacom.chessclock.Model.TimeRecord;
 
 public class Archive extends AppCompatActivity {
     private TextView ArchiveTextWhite;

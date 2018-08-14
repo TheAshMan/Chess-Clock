@@ -1,4 +1,4 @@
-package Model;
+package com.ashwinsreevatsacom.chessclock.Model;
 
 /**
  * Created by ashwin on 2/24/2018.

@@ -3,19 +3,10 @@ package com.ashwinsreevatsacom.chessclock;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import com.dd.processbutton.ProcessButton;
-
-import java.sql.Time;
-import java.util.List;
-
-import Model.TimeRecord;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,20 +1,13 @@
 package com.ashwinsreevatsacom.chessclock;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.media.MediaPlayer;
 import android.os.CountDownTimer;
-import android.provider.ContactsContract;
 import android.widget.Button;
 
-import com.dd.processbutton.FlatButton;
-import com.dd.processbutton.ProcessButton;
-
 import java.util.List;
-import java.util.TimerTask;
 
-import Model.TimeRecord;
+import com.ashwinsreevatsacom.chessclock.Model.TimeRecord;
 
 /**
  * Created by ashwin on 2/19/2018.
