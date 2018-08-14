@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import Data.DatabaseHandler;
 import Model.TimeRecord;
 
 public class Archive extends AppCompatActivity {
@@ -26,8 +25,6 @@ public class Archive extends AppCompatActivity {
         setContentView(R.layout.activity_archive);
 
 
-        DatabaseHandler db = DatabaseHandler.get(this);
-        timeRecordList = db.getAllTimeRecords();
 
 
 

@@ -14,7 +14,6 @@ import com.dd.processbutton.ProcessButton;
 import java.util.List;
 import java.util.TimerTask;
 
-import Data.DatabaseHandler;
 import Model.TimeRecord;
 
 /**
@@ -33,7 +32,6 @@ public class myChessClock {
 
     private boolean isFirst = false; //was this button selected first >> white
 
-    private DatabaseHandler db;
     private static List<TimeRecord> timeRecordList;
 
     public myChessClock(){
@@ -46,7 +44,6 @@ public class myChessClock {
         countDownButton = newCountDownbutton;
         updateTimer();
 
-        db = DatabaseHandler.get(countDownButton.getContext());
 
     }
 
@@ -88,7 +85,6 @@ public class myChessClock {
         if(isRunning) {
             isRunning = false;
             countDownTimer.cancel();
-            db.addTimeRecords(new TimeRecord(timeLeftInMilliseconds,isFirst()));
             setButtonColorGray();
 //        updateTimer();
         }

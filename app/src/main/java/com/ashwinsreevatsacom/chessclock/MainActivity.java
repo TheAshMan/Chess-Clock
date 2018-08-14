@@ -15,7 +15,6 @@ import com.dd.processbutton.ProcessButton;
 import java.sql.Time;
 import java.util.List;
 
-import Data.DatabaseHandler;
 import Model.TimeRecord;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private Button pauseButton;
     private Button settingsButton;
     private Button resetButton;
-    private Button archiveButton;
 
 
 
@@ -38,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences myPrefs;
 
 
-    DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 //        DatabaseHandler db = new DatabaseHandler(this);
-        db = DatabaseHandler.get(this);
 
 
 
@@ -95,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 bottomClock.reset();
                 topClock.reset();
-                deleteTimeRecords();
 
             }
         });
@@ -124,17 +119,6 @@ public class MainActivity extends AppCompatActivity {
         settingsButton.getBackground().setColorFilter(getResources().
                 getColor(R.color.fbutton_color_concrete), PorterDuff.Mode.MULTIPLY);
 
-
-        archiveButton = (Button) findViewById(R.id.archiveButton);
-        archiveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Archive.class);
-                startActivityForResult(intent, REQUEST_CODE);
-            }
-        });
-        archiveButton.getBackground().setColorFilter(getResources().
-                getColor(R.color.fbutton_color_concrete), PorterDuff.Mode.MULTIPLY);
 
     }
 
@@ -211,11 +195,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void deleteTimeRecords(){
-        List<TimeRecord> timeRecordList = db.getAllTimeRecords();
-        for(TimeRecord t: timeRecordList){
-            db.deleteTimeRecord(t);
-        }
-    }
+
 
 }
