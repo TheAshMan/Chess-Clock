@@ -2,11 +2,18 @@ package com.ashwinsreevatsacom.chessclock;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.ashwinsreevatsacom.chessclock.Data.ChessClockContract;
+import com.ashwinsreevatsacom.chessclock.Data.ChessClockDbHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -111,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
                 getColor(R.color.fbutton_color_concrete), PorterDuff.Mode.MULTIPLY);
 
 
+        //Display database
+        displayDatabase();
     }
 
     @Override
@@ -186,6 +195,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void displayDatabase(){
+        ChessClockDbHelper mDbHelper = new ChessClockDbHelper(this);
 
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + ChessClockContract.ChessClockEntry.TABLE_NAME,null);
+
+        try{
+            Log.v("Database","Number of rows in archive database" + cursor.getCount());
+        } finally {
+            cursor.close();
+        }
+    }
 
 }
