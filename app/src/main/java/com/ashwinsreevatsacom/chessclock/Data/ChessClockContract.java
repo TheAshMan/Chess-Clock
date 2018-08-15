@@ -5,7 +5,7 @@ import android.provider.BaseColumns;
 /**
  * Defining database details: name, columns
  */
-public final class ChessClockContract {
+public final class ChessClockContract { //TODO Add details about the time settings for the chess game
 
     public static abstract class ChessClockEntry implements BaseColumns{
         public static final String TABLE_NAME = "ChessClockArchive";

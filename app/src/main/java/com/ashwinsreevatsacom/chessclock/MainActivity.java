@@ -1,5 +1,6 @@
 package com.ashwinsreevatsacom.chessclock;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.ashwinsreevatsacom.chessclock.Data.ChessClockContract;
+import com.ashwinsreevatsacom.chessclock.Data.ChessClockContract.ChessClockEntry;
 import com.ashwinsreevatsacom.chessclock.Data.ChessClockDbHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Button resetButton;
 
     private Button insertDummyDataButton; //TODO Delete once database has been set up
+    private ChessClockDbHelper mDbHelper;
 
     private final int REQUEST_CODE = 2;
 
@@ -124,10 +127,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 insertDummyData();
+                displayDatabase();
             }
         });
 
         //Display database
+        mDbHelper = new ChessClockDbHelper(this);//TODO Delete later on
         displayDatabase();
     }
 
@@ -214,10 +219,27 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = db.rawQuery("SELECT * FROM " + ChessClockContract.ChessClockEntry.TABLE_NAME,null);
 
         try{
-            Log.e("Database","Number of rows in archive database" + cursor.getCount());
+            Log.v("Database","Number of rows in archive database" + cursor.getCount());
         } finally {
             cursor.close();
         }
     }
 
+    /**
+     * Insert dummy data into archive database //TODO Delete when finished
+     */
+    private void insertDummyData(){
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(ChessClockEntry.GAME_ID, "1");
+        values.put(ChessClockEntry.DATE, "02/23/2018");
+        values.put(ChessClockEntry.PIECE_COLOR, ChessClockEntry.PIECE_COLOR_WHITE);
+        values.put(ChessClockEntry.TIME, "24.2");
+        values.put(ChessClockEntry.OPPONENT, "Joe");
+
+        long newRowId = db.insert(ChessClockEntry.TABLE_NAME,null, values);
+
+        Log.v("MainActivity", "New Row Id" + newRowId);
+    }
 }
