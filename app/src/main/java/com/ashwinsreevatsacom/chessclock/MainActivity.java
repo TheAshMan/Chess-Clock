@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private Button settingsButton;
     private Button resetButton;
 
-
+    private Button insertDummyDataButton; //TODO Delete once database has been set up
 
     private final int REQUEST_CODE = 2;
 
@@ -118,6 +118,15 @@ public class MainActivity extends AppCompatActivity {
                 getColor(R.color.fbutton_color_concrete), PorterDuff.Mode.MULTIPLY);
 
 
+
+        insertDummyDataButton = (Button) findViewById(R.id.InsertDummyDataButton); //TODO Delete all examples of this button
+        insertDummyDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                insertDummyData();
+            }
+        });
+
         //Display database
         displayDatabase();
     }
@@ -195,6 +204,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Displays the number of rows in the archive database as a log error message
+     */
     private void displayDatabase(){
         ChessClockDbHelper mDbHelper = new ChessClockDbHelper(this);
 
@@ -202,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = db.rawQuery("SELECT * FROM " + ChessClockContract.ChessClockEntry.TABLE_NAME,null);
 
         try{
-            Log.v("Database","Number of rows in archive database" + cursor.getCount());
+            Log.e("Database","Number of rows in archive database" + cursor.getCount());
         } finally {
             cursor.close();
         }
