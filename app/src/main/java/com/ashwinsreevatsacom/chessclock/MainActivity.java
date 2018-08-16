@@ -116,6 +116,9 @@ public class MainActivity extends AppCompatActivity {
                 getColor(R.color.fbutton_color_concrete), PorterDuff.Mode.MULTIPLY);
     }
 
+    /**
+     * Abstracted out the setting up of the reset button in the onCreate method
+     */
     private void setUpResetButton(){
         resetButton = (Button) findViewById(R.id.ResetButton);
         resetButton.setOnClickListener(new View.OnClickListener() {
@@ -130,6 +133,9 @@ public class MainActivity extends AppCompatActivity {
                 getColor(R.color.fbutton_color_concrete), PorterDuff.Mode.MULTIPLY);
     }
 
+    /**
+     * Abstracted out the setting up of the settings button in the onCreate method
+     */
     private void setUpSettingsButton(){
         settingsButton = (Button) findViewById(R.id.SettingsButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
@@ -154,6 +160,9 @@ public class MainActivity extends AppCompatActivity {
                 getColor(R.color.fbutton_color_concrete), PorterDuff.Mode.MULTIPLY);
     }
 
+    /**
+     * Abstracted out the setting up of the dummy data button in the onCreate method
+     */
     private void setUpDummyDataButton(){
         insertDummyDataButton = (Button) findViewById(R.id.InsertDummyDataButton); //TODO Delete all examples of this button
         insertDummyDataButton.setOnClickListener(new View.OnClickListener() {
@@ -165,6 +174,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Abstracted out the setting up of the archive button in the onCreate method
+     */
     private void setUpArchiveButton(){
         archiveButton = (Button) findViewById(R.id.archiveButton);
         archiveButton.setOnClickListener(new View.OnClickListener() {
