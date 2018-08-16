@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Button pauseButton;
     private Button settingsButton;
     private Button resetButton;
+    private Button archiveButton;
 
     private Button insertDummyDataButton; //TODO Delete once database has been set up
     private ChessClockDbHelper mDbHelper;
@@ -50,9 +51,27 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        //Set up all the buttons needed in the main activity
+        setUpBottomButton();
+        setUpTopButton();
+        setUpPauseButton();
+        setUpResetButton();
+        setUpSettingsButton();
+        setUpDummyDataButton();
+        setUpArchiveButton();
 
 
 
+
+        //Display database
+        mDbHelper = new ChessClockDbHelper(this);//TODO Delete later on
+        displayDatabase();
+    }
+
+    /**
+     * Abstracted out the setting up of the bottom button in the onCreate method
+     */
+    private void setUpBottomButton() {
         bottomButton = (Button) findViewById(R.id.BottomButton);
         bottomClock = new myChessClock(300000,bottomButton);
         bottomButton.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +83,12 @@ public class MainActivity extends AppCompatActivity {
         });
         bottomButton.getBackground().setColorFilter(getResources().
                 getColor(R.color.fbutton_color_concrete), PorterDuff.Mode.MULTIPLY);
+    }
 
+    /**
+     * Abstracted out the setting up of the top button in the onCreate method
+     */
+    private void setUpTopButton(){
         topButton = (Button) findViewById(R.id.TopButton);
         topClock = new myChessClock(300000,topButton);
         topButton.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +99,12 @@ public class MainActivity extends AppCompatActivity {
         });
         topButton.getBackground().setColorFilter(getResources().
                 getColor(R.color.fbutton_color_concrete), PorterDuff.Mode.MULTIPLY);
+    }
 
+    /**
+     * Abstracted out the setting up of the pause button in the onCreate method
+     */
+    private void setUpPauseButton(){
         pauseButton = (Button) findViewById(R.id.PauseButton);
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +114,9 @@ public class MainActivity extends AppCompatActivity {
         });
         pauseButton.getBackground().setColorFilter(getResources().
                 getColor(R.color.fbutton_color_concrete), PorterDuff.Mode.MULTIPLY);
+    }
 
+    private void setUpResetButton(){
         resetButton = (Button) findViewById(R.id.ResetButton);
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +128,9 @@ public class MainActivity extends AppCompatActivity {
         });
         resetButton.getBackground().setColorFilter(getResources().
                 getColor(R.color.fbutton_color_concrete), PorterDuff.Mode.MULTIPLY);
+    }
 
+    private void setUpSettingsButton(){
         settingsButton = (Button) findViewById(R.id.SettingsButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,9 +152,9 @@ public class MainActivity extends AppCompatActivity {
         });
         settingsButton.getBackground().setColorFilter(getResources().
                 getColor(R.color.fbutton_color_concrete), PorterDuff.Mode.MULTIPLY);
+    }
 
-
-
+    private void setUpDummyDataButton(){
         insertDummyDataButton = (Button) findViewById(R.id.InsertDummyDataButton); //TODO Delete all examples of this button
         insertDummyDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,11 +163,18 @@ public class MainActivity extends AppCompatActivity {
                 displayDatabase();
             }
         });
-
-        //Display database
-        mDbHelper = new ChessClockDbHelper(this);//TODO Delete later on
-        displayDatabase();
     }
+
+    private void setUpArchiveButton(){
+        archiveButton = (Button) findViewById(R.id.archiveButton);
+        archiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+
 
     @Override
     protected void onPause() { //To pause clocks when the app closes
