@@ -1,5 +1,6 @@
 package com.ashwinsreevatsacom.chessclock.Data;
 
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
@@ -7,7 +8,15 @@ import android.provider.BaseColumns;
  */
 public final class ChessClockContract { //TODO Add details about the time settings for the chess game
 
+    public static final String CONTENT_AUTHORITY = "com.ashwinsreevatsacom.chessclock";
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    public static final String PATH_CHESS_CLOCK_TIMES = "ChessClockArchive";
+
+
     public static abstract class ChessClockEntry implements BaseColumns{
+
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_CHESS_CLOCK_TIMES);
+
         public static final String TABLE_NAME = "ChessClockArchive";
 
         public static final String _ID = BaseColumns._ID; //ID for each data input
