@@ -18,6 +18,11 @@
         </activity>
         <activity android:name=".Settings" />
         <activity android:name=".Archive"></activity>
+
+        <provider
+            android:authorities="com.ashwinsreevatsa.ChessClock"
+            android:name=".Data.ChessClockProvider"
+            android:exported="false"/>
     </application>
 
 </manifest>
