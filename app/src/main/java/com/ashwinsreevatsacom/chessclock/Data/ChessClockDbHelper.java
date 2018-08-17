@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ChessClockDbHelper extends SQLiteOpenHelper{
 
+    public static final String LOG_TAG = ChessClockProvider.class.getSimpleName();
+
     //name of database file
     private static final String DATABASE_NAME = "archive.db";
 
