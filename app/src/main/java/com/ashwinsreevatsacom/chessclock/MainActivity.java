@@ -265,10 +265,26 @@ public class MainActivity extends AppCompatActivity {
      * Displays the number of rows in the archive database as a log error message
      */
     private void displayDatabase(){
-        ChessClockDbHelper mDbHelper = new ChessClockDbHelper(this);
 
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + ChessClockContract.ChessClockEntry.TABLE_NAME,null);
+
+        String[] projection = {
+                ChessClockEntry._ID,
+                ChessClockEntry.GAME_ID,
+                ChessClockEntry.DATE,
+                ChessClockEntry.OPPONENT,
+                ChessClockEntry.PIECE_COLOR,
+                ChessClockEntry.TIME};
+
+
+        Cursor cursor = db.query(
+                ChessClockEntry.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null);
 
         try{
             Log.v("Database","Number of rows in archive database " + cursor.getCount());
