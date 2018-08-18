@@ -56,6 +56,7 @@ public class ChessClockProvider extends ContentProvider {
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 cursor = database.query(ChessClockEntry.TABLE_NAME, projection, selection,
                         selectionArgs,null,null,sortOrder);
+                break;
             default:
                 throw new IllegalArgumentException("Cannot query unknown URI " + uri);
         }

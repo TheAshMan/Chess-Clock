@@ -20,7 +20,7 @@
         <activity android:name=".Archive"></activity>
 
         <provider
-            android:authorities="com.ashwinsreevatsa.ChessClock"
+            android:authorities="com.ashwinsreevatsacom.chessclock"
             android:name=".Data.ChessClockProvider"
             android:exported="false"/>
     </application>

@@ -277,42 +277,35 @@ public class MainActivity extends AppCompatActivity {
                 ChessClockEntry.TIME};
 
 
-        Cursor cursor = db.query(
-                ChessClockEntry.TABLE_NAME,
+//        Cursor cursor = db.query(
+//                ChessClockEntry.TABLE_NAME,
+//                projection,
+//                null,
+//                null,
+//                null,
+//                null,
+//                null);
+//
+//        try{
+//            Log.v("Database","Number of rows in archive database " + cursor.getCount());
+//        } finally {
+//            cursor.close();
+//        }
+//
+//
+        //Performs query on provider using ContentResolver
+        Cursor cursor = getContentResolver().query(
+                ChessClockEntry.CONTENT_URI,
                 projection,
-                null,
-                null,
                 null,
                 null,
                 null);
 
         try{
-            Log.v("Database","Number of rows in archive database " + cursor.getCount());
+            Log.v("Database", "Number of rows in archive databse: " + cursor.getCount());
         } finally {
             cursor.close();
-        }
-//
-//        String[] projection = {
-//                ChessClockEntry._ID,
-//                ChessClockEntry.GAME_ID,
-//                ChessClockEntry.DATE,
-//                ChessClockEntry.OPPONENT,
-//                ChessClockEntry.PIECE_COLOR,
-//                ChessClockEntry.TIME};
-//
-//        //Performs query on provider using ContentResolver
-//        Cursor cursor = getContentResolver().query(
-//                ChessClockEntry.CONTENT_URI,
-//                projection,
-//                null,
-//                null,
-//                null);
-
-//        try{
-//            Log.v("Database", "Number of rows in archive databse: " + cursor.getCount());
-//        } finally {
-//            cursor.close();
-//        }//TODO Causing some error of some sort- some null object reference
+        }//TODO Causing some error of some sort- some null object reference
 
     }
 
