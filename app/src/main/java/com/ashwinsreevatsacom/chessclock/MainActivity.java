@@ -184,7 +184,8 @@ public class MainActivity extends AppCompatActivity {
         archiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this, Archive.class);
+                startActivityForResult(intent,REQUEST_CODE);
             }
         });
     }
