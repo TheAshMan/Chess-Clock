@@ -13,6 +13,7 @@ import android.util.Log;
 
 import com.ashwinsreevatsacom.chessclock.Data.ChessClockContract.ChessClockEntry;
 
+import static android.icu.text.UnicodeSet.CASE;
 import static com.ashwinsreevatsacom.chessclock.Data.ChessClockDbHelper.LOG_TAG;
 
 public class ChessClockProvider extends ContentProvider {
@@ -68,7 +69,15 @@ public class ChessClockProvider extends ContentProvider {
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
-        return null;
+        final int match = sUriMatcher.match(uri);
+        switch (match){
+            case CHESS_ARCHIVE:
+                return ChessClockEntry.CONTENT_LIST_TYPE;
+            case CHESS_ID:
+                return ChessClockEntry.CONTENT_ITEM_TYPE;
+            default:
+                throw new IllegalStateException("Unknown URI" + uri + " with match " + match);
+        }
     }
 
     @Nullable
@@ -85,6 +94,19 @@ public class ChessClockProvider extends ContentProvider {
 
     private Uri insertChessTime(Uri uri, ContentValues values){
         //TODO sanity checks
+        Integer game_ID = values.getAsInteger(ChessClockEntry.GAME_ID);
+        Boolean pieceColor = values.getAsBoolean(ChessClockEntry.PIECE_COLOR);
+        String time = values.getAsString(ChessClockEntry.TIME);
+
+        if(pieceColor == null){
+            throw new IllegalArgumentException("Chess Time requires a color");
+        }
+        if (time == null) {
+            throw new IllegalArgumentException("Chess Time requires a time");
+        }
+        if (game_ID == null) {
+            throw new IllegalArgumentException("Chess Time requires a game id");
+        }
 
         //Insert data into database using ContentUris
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
@@ -101,12 +123,72 @@ public class ChessClockProvider extends ContentProvider {
 
 
     @Override
-    public int delete(@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
-        return 0;
+    public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
+        // Get writeable database
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
+
+        final int match = sUriMatcher.match(uri);
+        switch (match) {
+            case CHESS_ARCHIVE:
+                // Delete all rows that match the selection and selection args
+                return database.delete(ChessClockEntry.TABLE_NAME, selection, selectionArgs);
+            case CHESS_ID:
+                // Delete a single row given by the ID in the URI
+                selection = ChessClockEntry._ID + "=?";
+                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
+                return database.delete(ChessClockEntry.TABLE_NAME, selection, selectionArgs);
+            default:
+                throw new IllegalArgumentException("Deletion is not supported for " + uri);
+        }
+
     }
 
     @Override
-    public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
-        return 0;
+    public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String selection,
+                      @Nullable String[] selectionArgs) {
+        final int match = sUriMatcher.match(uri);
+        switch (match){
+            case CHESS_ARCHIVE:
+                return updateChessTime(uri, contentValues, selection, selectionArgs);
+            case CHESS_ID:
+                selection = ChessClockEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return updateChessTime(uri,contentValues,selection,selectionArgs);
+            default:
+                throw new IllegalArgumentException("Update is not supported for " + uri);
+
+        }
+    }
+
+    private int updateChessTime(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        //sanity checks
+        if(values.containsKey(ChessClockEntry.PIECE_COLOR)) {
+            Boolean pieceColor = values.getAsBoolean(ChessClockEntry.PIECE_COLOR);
+            if (pieceColor == null) {
+                throw new IllegalArgumentException("Chess Time requires a color");
+            }
+        }
+
+        if(values.containsKey(ChessClockEntry.TIME)) {
+            String time = values.getAsString(ChessClockEntry.TIME);
+            if (time == null) {
+                throw new IllegalArgumentException("Chess Time requires a time");
+            }
+        }
+
+        if(values.containsKey(ChessClockEntry.GAME_ID)) {
+            Integer game_ID = values.getAsInteger(ChessClockEntry.GAME_ID);
+            if (game_ID == null) {
+                throw new IllegalArgumentException("Chess Time requires a game id");
+            }
+        }
+
+        //Logic
+        if(values.size()==0){
+            return 0;
+        }
+
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        return db.update(ChessClockEntry.TABLE_NAME,values, selection, selectionArgs);
     }
 }

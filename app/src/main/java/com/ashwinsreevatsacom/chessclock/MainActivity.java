@@ -297,8 +297,6 @@ public class MainActivity extends AppCompatActivity {
      * Insert dummy data into archive database //TODO Delete when finished
      */
     private void insertDummyData(){
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(ChessClockEntry.GAME_ID, "1");
         values.put(ChessClockEntry.DATE, "02/23/2018");
