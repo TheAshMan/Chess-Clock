@@ -7,11 +7,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.ashwinsreevatsacom.chessclock.Data.ChessClockContract;
 import com.ashwinsreevatsacom.chessclock.Data.ChessClockContract.ChessClockEntry;
@@ -266,7 +268,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private void displayDatabase(){
 
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
         String[] projection = {
                 ChessClockEntry._ID,
@@ -277,23 +278,6 @@ public class MainActivity extends AppCompatActivity {
                 ChessClockEntry.TIME};
 
 
-//        Cursor cursor = db.query(
-//                ChessClockEntry.TABLE_NAME,
-//                projection,
-//                null,
-//                null,
-//                null,
-//                null,
-//                null);
-//
-//        try{
-//            Log.v("Database","Number of rows in archive database " + cursor.getCount());
-//        } finally {
-//            cursor.close();
-//        }
-//
-//
-        //Performs query on provider using ContentResolver
         Cursor cursor = getContentResolver().query(
                 ChessClockEntry.CONTENT_URI,
                 projection,
@@ -322,8 +306,16 @@ public class MainActivity extends AppCompatActivity {
         values.put(ChessClockEntry.TIME, "24.2");
         values.put(ChessClockEntry.OPPONENT, "Joe");
 
-        long newRowId = db.insert(ChessClockEntry.TABLE_NAME,null, values);
 
-        Log.v("MainActivity", "New Row Id" + newRowId);
-    }
+        Uri newUri = getContentResolver().insert(ChessClockEntry.CONTENT_URI,values);
+
+        if (newUri == null) {
+            // If the new content URI is null, then there was an error with insertion.
+            Toast.makeText(this, getString(R.string.editor_insert_chess_time_failed),
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            // Otherwise, the insertion was successful and we can display a toast.
+            Toast.makeText(this, getString(R.string.editor_insert_chess_time_successful),
+                    Toast.LENGTH_SHORT).show();
+        }    }
 }

@@ -2,4 +2,6 @@
     <string name="app_name">Chess Clock</string>
     <string name="Timer_Button_Width">330dp</string>
     <string name="Timer_Button_Height">200dp</string>
+    <string name="editor_insert_chess_time_successful">Chess Time Saved</string>
+    <string name="editor_insert_chess_time_failed">Error with saving chess time</string>
 </resources>
