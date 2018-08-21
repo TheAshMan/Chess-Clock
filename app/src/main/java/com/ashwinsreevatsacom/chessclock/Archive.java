@@ -43,8 +43,8 @@ public class Archive extends AppCompatActivity implements LoaderManager.LoaderCa
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         String[] projection = {
-                ChessClockEntry._ID,
                 ChessClockEntry.OPPONENT,
+                ChessClockEntry._ID,
                 ChessClockEntry.DATE
         };
 
