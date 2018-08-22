@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         setUpPauseButton();
         setUpResetButton();
         setUpSettingsButton();
-        setUpDummyDataButton();
         setUpArchiveButton();
 
 
@@ -162,19 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 getColor(R.color.fbutton_color_concrete), PorterDuff.Mode.MULTIPLY);
     }
 
-    /**
-     * Abstracted out the setting up of the dummy data button in the onCreate method
-     */
-    private void setUpDummyDataButton(){
-        insertDummyDataButton = (Button) findViewById(R.id.InsertDummyDataButton); //TODO Delete all examples of this button
-        insertDummyDataButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                insertDummyData();
-                displayDatabase();
-            }
-        });
-    }
+
 
     /**
      * Abstracted out the setting up of the archive button in the onCreate method
@@ -295,30 +282,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * Insert dummy data into archive database //TODO Delete when finished
-     */
-    private void insertDummyData() {
-        ContentValues values = new ContentValues();
-        values.put(ChessClockEntry.GAME_ID, "1");
-        values.put(ChessClockEntry.DATE, "02/23/2018");
-        values.put(ChessClockEntry.PIECE_COLOR, ChessClockEntry.PIECE_COLOR_WHITE);
-        values.put(ChessClockEntry.TIME, "24.2");
-        values.put(ChessClockEntry.OPPONENT, "Joe");
 
-
-        Uri newUri = getContentResolver().insert(ChessClockEntry.CONTENT_URI, values);
-
-        if (newUri == null) {
-            // If the new content URI is null, then there was an error with insertion.
-            Toast.makeText(this, getString(R.string.editor_insert_chess_time_failed),
-                    Toast.LENGTH_SHORT).show();
-        } else {
-            // Otherwise, the insertion was successful and we can display a toast.
-            Toast.makeText(this, getString(R.string.editor_insert_chess_time_successful),
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
 
     private void insertButtonData(myChessClock chessClock){
         ContentValues values = new ContentValues();
