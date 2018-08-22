@@ -252,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
         topClock.stopTimer();
         bottomClock.startTimer();
 
+        insertButtonData(topClock);
     }
 
     public void bottomButtonPressed(){
@@ -261,7 +262,7 @@ public class MainActivity extends AppCompatActivity {
         bottomClock.stopTimer();
         topClock.startTimer();
 
-
+        insertButtonData(bottomClock);
     }
 
     /**
@@ -297,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Insert dummy data into archive database //TODO Delete when finished
      */
-    private void insertDummyData(){
+    private void insertDummyData() {
         ContentValues values = new ContentValues();
         values.put(ChessClockEntry.GAME_ID, "1");
         values.put(ChessClockEntry.DATE, "02/23/2018");
@@ -306,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
         values.put(ChessClockEntry.OPPONENT, "Joe");
 
 
-        Uri newUri = getContentResolver().insert(ChessClockEntry.CONTENT_URI,values);
+        Uri newUri = getContentResolver().insert(ChessClockEntry.CONTENT_URI, values);
 
         if (newUri == null) {
             // If the new content URI is null, then there was an error with insertion.
@@ -316,5 +317,28 @@ public class MainActivity extends AppCompatActivity {
             // Otherwise, the insertion was successful and we can display a toast.
             Toast.makeText(this, getString(R.string.editor_insert_chess_time_successful),
                     Toast.LENGTH_SHORT).show();
-        }    }
+        }
+    }
+
+    private void insertButtonData(myChessClock chessClock){
+        ContentValues values = new ContentValues();
+        values.put(ChessClockEntry.GAME_ID, "1");
+        values.put(ChessClockEntry.DATE, "02/23/2018");
+        values.put(ChessClockEntry.PIECE_COLOR, chessClock.isFirst());
+        values.put(ChessClockEntry.TIME, chessClock.getTimeLeftInMilliseconds());
+        values.put(ChessClockEntry.OPPONENT, "unknown");
+
+
+        Uri newUri = getContentResolver().insert(ChessClockEntry.CONTENT_URI, values);
+
+        if (newUri == null) {
+            // If the new content URI is null, then there was an error with insertion.
+            Toast.makeText(this, getString(R.string.editor_insert_chess_time_failed),
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            // Otherwise, the insertion was successful and we can display a toast.
+            Toast.makeText(this, getString(R.string.editor_insert_chess_time_successful),
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
 }
