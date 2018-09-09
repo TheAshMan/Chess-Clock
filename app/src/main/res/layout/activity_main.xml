@@ -46,7 +46,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024" />
 
-    <ImageButton
+    <Button
         android:id="@+id/PauseButton"
         android:layout_width="72dp"
         android:layout_height="52dp"
@@ -54,8 +54,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background=""
-        android:src="@drawable/ic_button_pause_black_24dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/ic_button_pause_black_24dp"
 
         android:text="Pause"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,7 +65,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.498" />
 
-    <ImageButton
+    <Button
         android:id="@+id/SettingsButton"
         android:layout_width="77dp"
         android:layout_height="45dp"
@@ -73,8 +73,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background=""
-        android:src="@drawable/ic_button_settings_black_24dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/ic_button_settings_black_24dp"
         android:text="Settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +82,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <Button
         android:id="@+id/ResetButton"
         android:layout_width="79dp"
         android:layout_height="45dp"
@@ -90,8 +90,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background=""
-        android:src="@drawable/ic_button_play_arrow_black_24dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/ic_button_play_arrow_black_24dp"
         android:text="Reset"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +100,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.498" />
 
-    <ImageButton
+    <Button
         android:id="@+id/archiveButton"
         android:layout_width="86dp"
         android:layout_height="37dp"
@@ -108,8 +108,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background=""
-        android:src="@drawable/ic_button_archive_black_24dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/ic_button_archive_black_24dp"
         android:text="Archive"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
